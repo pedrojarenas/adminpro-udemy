@@ -17,6 +17,8 @@ import { PAGES_ROUTES } from './pages.routes';
 // Temporal
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesaComponent } from './promesa/promesa.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +28,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
         PagesComponent,
         IncrementadorComponent,
         GraficoDonaComponent,
-        AccountSettingsComponent
+        AccountSettingsComponent,
+        PromesaComponent,
+        RxjsComponent
     ],
     exports: [
         DashbouardComponent,
