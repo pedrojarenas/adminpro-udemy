@@ -14,11 +14,16 @@ import { DashbouardComponent } from './dashbouard/dashbouard.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { PAGES_ROUTES } from './pages.routes';
 
-// Temporal
+// Pipe module
+import { PipesModule } from '../pipes/pipes.module';
+
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesaComponent } from './promesa/promesa.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
     declarations: [
@@ -30,7 +35,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         GraficoDonaComponent,
         AccountSettingsComponent,
         PromesaComponent,
-        RxjsComponent
+        RxjsComponent,
+        ProfileComponent
     ],
     exports: [
         DashbouardComponent,
@@ -39,10 +45,12 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         IncrementadorComponent
     ],
     imports: [
+        CommonModule,
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        PipesModule
     ]
 })
 export class PagesModule { }
