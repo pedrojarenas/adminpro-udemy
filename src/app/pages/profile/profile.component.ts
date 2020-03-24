@@ -12,10 +12,10 @@ export class ProfileComponent implements OnInit {
   imagenSubir: File;
   imagenTemp: string;
 
-  constructor( public _usuarioService: UsuarioService) { 
+  constructor( public _usuarioService: UsuarioService) {
     this.usuario = this._usuarioService.usuario;
   }
-  
+
   guardar( usuario: Usuario ) {
     this.usuario.nombre = usuario.nombre;
     if (!this.usuario.google) {
@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     this.imagenSubir = archivo;
     let reader = new FileReader();
     let urlImagenTemp = reader.readAsDataURL( archivo );
-    reader.onloadend = () => this.imagenTemp = reader.result;
+    reader.onloadend = () => this.imagenTemp = reader.result.toString();
   }
 
   cambiarImagen(){
