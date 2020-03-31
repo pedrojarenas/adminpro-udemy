@@ -7,7 +7,8 @@ import 'rxjs/add/operator/catch';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,22 @@ export class UsuarioService {
 
   estaLogeado() {
     return (this.token.length > 5) ? true : false;
+  }
+
+  renuevaToken() {
+    let url = URL_SERVICIOS + `/login/renuevatoken?token=${this.token}`;
+    return this.http.get(url)
+      .map( (resp: any) => {
+        this.token = resp.token;
+        localStorage.setItem('token', this.token);
+        console.log('Token renovado');
+        return true;
+      })
+      .catch( err => {
+        swal('No se pudo renovar el token', 'No fue posible renovar el token', 'error');
+        this.router.navigate(['/login']);
+        return Observable.throw( err );
+      });
   }
 
   cargarStorage() {
@@ -70,6 +87,10 @@ export class UsuarioService {
       .map( (resp: any) => {
         this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
         return true;
+      })
+      .catch( err => {
+        swal('Error en el login de Google' ,err.error.mensaje, 'error');
+        return Observable.throw( err );
       });
   }
 
@@ -86,7 +107,7 @@ export class UsuarioService {
         return true;
       })
       .catch( err => {
-        swal('Error en el login',err.error.mensaje,'error');
+        swal('Error en el login', err.error.mensaje, 'error');
         return Observable.throw( err );
       });
   }
